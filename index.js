@@ -4,6 +4,9 @@ const dotenv = require("dotenv");
 
 const mySqlPool = require("./src/config/db");
 const { ProductRouter } = require("./src/routes/productRoutes");
+const { RolesRoutes } = require("./src/routes/rolesController");
+const { UserRouter } = require("./src/routes/userController");
+const { AuthRoutes } = require("./src/routes/authRoutes");
 
 
 dotenv.config();
@@ -14,6 +17,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", ProductRouter);
+app.use("/api",RolesRoutes)
+app.use("/api",UserRouter)
+app.use("/api",AuthRoutes)
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
