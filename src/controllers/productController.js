@@ -2,7 +2,7 @@ const db = require("../config/db");
 
 const getAllProducts = async (req, res, next) => {
   try {
-    const data = await db.query("select * from products");
+    const data = await  db.query("select * from products")
     if (!data) {
       res.status(404).json({
         status: false,
@@ -13,12 +13,84 @@ const getAllProducts = async (req, res, next) => {
     res.status(200).json({
       status: true,
       message: "Products retrieved successfully",
-      data: data[0],
+      data: data[0],  
     });
   } catch (err) {
     next(err);
   }
 };
+
+const createProduct = async (req, res, next) => {
+  const { name, price, description } = req.body;
+  try {
+    const data = await db.query(
+      `INSERT INTO products (name, price, description) VALUES ('${name}', ${price}, '${description}')`
+    );
+    res.status(200).json({
+      status: true,
+      message: "Product created successfully",
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+
+const updateProduct = async (req, res, next) => {
+  const { id } = req.params;
+  const { name, price, description } = req.body;
+  try {
+    const data = await db.query(
+      `UPDATE products SET name='${name}', price=${price}, description='${description}' WHERE id=${id}`
+    );
+    res.status(200).json({
+      status: true,
+      message: "Product updated successfully",
+      data,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+// const createProduct = async (req, res, next) => {
+//   const { name, price, description } = req.body; 
+//   try {
+//     const data = await db.query(
+//       'INSERT INTO products (name, price, description) VALUES (?, ?, ?)',
+//       [name, price, description]
+//     );
+//     res.status(200).json({
+//       status: true,
+//       message: "Product created successfully",
+//       data,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
+
+
+
+// const updateProduct = async (req, res, next) => {
+//   const { id, name, price, description } = req.body; 
+//   try {
+//     const data = await db.query(
+//       'UPDATE products SET name = ?, price = ?, description = ? WHERE id = ?',
+//       [name, price, description, id]
+//     );
+//     res.status(200).json({
+//       status: true,
+//       message: "Product updated successfully",
+//       data,
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// };
 
 const getProductById = async (req, res, next) => {
   const { id } = req.params;
@@ -54,4 +126,4 @@ const deleteProduct = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllProducts, deleteProduct, getProductById };
+module.exports = { getAllProducts, deleteProduct, getProductById,createProduct,updateProduct };
