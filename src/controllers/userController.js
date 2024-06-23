@@ -103,4 +103,4 @@ const getUserById = async (req, res, next) => {
 
 
 
-module.exports = { createUser, getAllUser, getUserById,addToBasket };
+module.exports = { createUser, getAllUser, getUserById };
