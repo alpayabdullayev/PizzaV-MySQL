@@ -60,4 +60,47 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser, getAllUser, getUserById };
+// const addToBasket = async (req, res, next) => {
+//   const { product_id, size_id, price, quantity } = req.body;
+//   const {userId} = req.user; 
+
+//   try {
+//     if (!product_id || !price || !quantity) {
+//       return res.status(400).json({
+//         status: false,
+//         message: "Product ID, price, and quantity are required",
+//       });
+//     }
+
+//     const basketItem = {
+//       user_id: userId,
+//       product_id: product_id,
+//       size_id: size_id || null, 
+//       price: price,
+//       quantity: quantity,
+//     };
+
+//     const result = await db.query("INSERT INTO basket SET ?", [basketItem]);
+
+//     res.status(201).json({
+//       status: true,
+//       message: "Product added to basket successfully",
+//       data: {
+//         basketItemId: result.insertId, 
+//         user_id: userId,
+//         product_id: product_id,
+//         size_id: size_id || null,
+//         price: price,
+//         quantity: quantity,
+//       },
+//     });
+//   } catch (err) {
+//     console.error("Error adding product to basket:", err);
+//     next(err);
+//   }
+// };
+
+
+
+
+module.exports = { createUser, getAllUser, getUserById,addToBasket };

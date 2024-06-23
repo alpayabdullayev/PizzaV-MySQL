@@ -9,6 +9,7 @@ const { UserRouter } = require("./src/routes/userController");
 const { AuthRoutes } = require("./src/routes/authRoutes");
 const { CategoryRoutes } = require("./src/routes/categoryRoutes");
 const { SizeRoutes } = require("./src/routes/sizeRoutes");
+const { PriceRoutes } = require("./src/routes/priceRoutes");
 
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use("/api",UserRouter)
 app.use("/api",AuthRoutes)
 app.use("/api",CategoryRoutes)
 app.use("/api",SizeRoutes)
+app.use("/api",PriceRoutes)
 
 app.use(
   "/uploads",
