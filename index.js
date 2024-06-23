@@ -7,6 +7,7 @@ const { ProductRouter } = require("./src/routes/productRoutes");
 const { RolesRoutes } = require("./src/routes/rolesController");
 const { UserRouter } = require("./src/routes/userController");
 const { AuthRoutes } = require("./src/routes/authRoutes");
+const { CategoryRoutes } = require("./src/routes/categoryRoutes");
 
 
 dotenv.config();
@@ -20,6 +21,13 @@ app.use("/api", ProductRouter);
 app.use("/api",RolesRoutes)
 app.use("/api",UserRouter)
 app.use("/api",AuthRoutes)
+app.use("/api",CategoryRoutes)
+
+
+app.use(
+  "/uploads",
+  express.static("src/uploads")
+);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
