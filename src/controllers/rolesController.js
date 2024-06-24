@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const { findAll } = require("../services/dbServices");
 
 const createRoles = async (req, res, next) => {
   const { name } = req.body;
@@ -19,16 +20,16 @@ const createRoles = async (req, res, next) => {
 
 
 const getAllRoles = async (req, res, next) => {
-    try {
-      const data = await db.query("SELECT * FROM roles");
-      res.status(200).json({
-        status: true,
-        message: "roles retrieved successfully",
-        data : data[0],
-      });
-    } catch (err) {
-      next(err);
-    }
-}
+  try {
+    const data = await findAll('roles');
+    res.status(200).json({
+      status: true,
+      message: "Roles retrieved successfully",
+      data: data,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {createRoles,getAllRoles}

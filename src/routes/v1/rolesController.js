@@ -1,7 +1,8 @@
 const express = require('express')
-const { createRoles, getAllRoles } = require('../controllers/rolesController')
-const verifyToken = require('../middleware/verifyToken')
-const checkRole = require('../middleware/checkRole')
+const verifyToken = require('../../middleware/verifyToken')
+const checkRole = require('../../middleware/checkRole')
+const { createRoles, getAllRoles } = require('../../controllers/rolesController')
+
 
 const RolesRoutes  = express.Router()
 

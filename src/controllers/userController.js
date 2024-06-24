@@ -1,5 +1,6 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
+const { findAll, findById } = require("../services/dbServices");
 
 const createUser = async (req, res, next) => {
   const { username, password, role_id } = req.body;
@@ -25,12 +26,12 @@ const createUser = async (req, res, next) => {
 
 const getAllUser = async (req, res, next) => {
   try {
-    const data = await db.query("SELECT * FROM users");
+    const data = await findAll("users");
 
     res.status(200).json({
       status: true,
       message: "All users",
-      data: data[0],
+      data,
     });
   } catch (err) {
     next(err);
@@ -42,18 +43,18 @@ const getUserById = async (req, res, next) => {
 
   try {
     if (!id) {
-      res.status(404).json({
+      return res.status(404).json({
         status: false,
         message: "User not found",
       });
     }
 
-    const data = await db.query(`SELECT * FROM users where id =${id}`);
+    const data = await findById("users", id);
 
     res.status(200).json({
       status: true,
-      message: "users found",
-      data: data[0],
+      message: "User found",
+      data,
     });
   } catch (err) {
     next(err);

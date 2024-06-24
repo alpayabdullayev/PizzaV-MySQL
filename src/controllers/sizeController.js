@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const { findAll } = require("../services/dbServices");
 
 
 const createSize = async (req, res, next) => {
@@ -28,11 +29,11 @@ const createSize = async (req, res, next) => {
 const getAllSize = async (req, res, next) => {
     try {
 
-      const data = await db.query("SELECT * FROM sizes");
+      const data = await findAll("sizes");
       res.status(200).json({
         status: true,
         message: "All sizes",
-        data : data[0],
+        data,
       });
     } catch (err) {
       next(err);

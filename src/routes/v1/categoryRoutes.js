@@ -1,7 +1,10 @@
 const express = require("express");
-const { createCategory, getAllCategory, deleteCategory } = require("../controllers/categoryController");
-const verifyToken = require("../middleware/verifyToken");
-const checkRole = require("../middleware/checkRole");
+
+
+
+const verifyToken = require("../../middleware/verifyToken");
+const checkRole = require("../../middleware/checkRole");
+const { createCategory, getAllCategory, deleteCategory } = require("../../controllers/categoryController");
 
 const CategoryRoutes = express.Router();
 
